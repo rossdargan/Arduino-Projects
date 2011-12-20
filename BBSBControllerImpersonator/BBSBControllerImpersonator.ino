@@ -67,7 +67,7 @@ void setup() {
    
 #ifdef DEBUG
   Serial.begin(57600);
-  Serial.println("UDP Demo");
+  Serial.println("BBSB Controller");
 #endif
 
   if (ether.begin(sizeof Ethernet::buffer, mymac) == 0) 

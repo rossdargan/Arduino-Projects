@@ -1,0 +1,17 @@
+Just a small collection of projects I have written, perhaps with some notes on where the libraries came from:
+
+BBSBControllerImpersonator:
+
+ * Nanode RF BBSB online controller simulator
+ * This allows you to use tools that can talk to thte Bye bye standbye contoller, without having to buy the online controller.
+ * Note this code is designed to work with a nanode RF, with a seperate 433 transmitter (not the transmitter on-board the device).
+ * This code is based around the EtherCard TFTP sample (https://github.com/thiseldo/EtherCardExamples/blob/master/EtherCard_TFTPServer/EtherCard_TFTPServer.ino)
+ * and the following home easy controller software: http://arduino.cc/playground/Code/HomeEasy?action=sourceblock&num=3
+ * My nanode is running the default bootloader. The TX pin of the 433 transmitter should be plugged into pin A0.
+ * Please let me know if you find this code useful (first published open source code!)
+
+You will require the following libraries: (all taken on the 20/12/2011)
+*EtherCard:= https://github.com/jcw/ethercard 
+*NanodeMac:= https://github.com/thiseldo/NanodeMAC 
+
+The project was written using Arduino 1.0.

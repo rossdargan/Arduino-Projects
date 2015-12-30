@@ -11,9 +11,11 @@
 //#undef DEBUG
 #define DEBUG
 
-#include <EtherCard.h>
-#include <NanodeMAC.h>
-#include <net.h>
+/*
+ * Arduino ENC28J60 Ethernet shield UDP broadcast client
+ */
+#include "EtherCard.h"
+
 
 
 
@@ -21,9 +23,8 @@
 // Please modify the following lines. mac and ip have to be unique
 // in your local area network. You can not have the same numbers in
 // two devices:
-static uint8_t mymac[6] = { 0,0,0,0,0,0 };
-static uint8_t myip[4] = { 192,168,1,199 };
-static uint8_t gwip[4] = { 192,168,1,1 };
+static byte mymac[] = { 0x74,0x69,0x69,0x2D,0x30,0x31 };
+static byte myip[] = { 192,168,1,15 };
 
 
 // TFTP port
@@ -35,11 +36,6 @@ static uint8_t gwip[4] = { 192,168,1,1 };
 #define BUFFER_SIZE 650
 
 byte Ethernet::buffer[BUFFER_SIZE];
-
-
-
-NanodeMAC mac( mymac );
-
 
 
 //Used by the BBSB transmit function
@@ -73,9 +69,9 @@ void setup() {
   if (ether.begin(sizeof Ethernet::buffer, mymac) == 0) 
     Serial.println( "Failed to access Ethernet controller");
 
-  ether.staticSetup(myip, gwip);
+  ether.staticSetup(myip);
 
-  ether.printIp("Server: ", ether.hisip);
+ // ether.printIp("Server: ", ether.hisip);
 
  /* 
    I found this just locked the device up in certain cases

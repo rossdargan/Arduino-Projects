@@ -102,7 +102,9 @@ void setup() {
 }
 static uint32_t timer;
 
-
+int sensorValue = 0;
+int count =0;
+int readings = 500;
 // Main loop, waits for tftp request and allows file to be uploaded to SRAM
 void loop(){
   int plen = ether.packetReceive();
@@ -120,8 +122,32 @@ void loop(){
   }
   //clear the buffer
   ether.packetLoop(plen);
-  CheckDoorbell();
 
+ 
+  
+  
+    int value = analogRead(A1);    
+    if(value>700)
+    {
+      
+      sensorValue += 1;
+     
+    }
+     count++;    
+    if(sensorValue>150)
+    {
+    Serial.print(sensorValue);
+    Serial.print(": ");
+    Serial.println(value);
+    }
+    if(count==readings)
+    {
+          CheckDoorbell();
+          sensorValue=0;
+          count=0;
+    }
+
+     
 
   //  if (millis() > timer) {
     //timer = millis() + 5000;
@@ -139,17 +165,7 @@ void my_callback (byte status, word off, word len) {
 void CheckDoorbell()
 {
 
-    int sensorValue = 0;
-  int readings = 30;
-  for (int x=0;x<readings;x++)
-  {
-    int value = analogRead(A1);    
-    if(value>700)
-    {
-      sensorValue += 1;
-    }
-    delay(5);
-  }   
+   
   // print out the value you read:
   currentActive = sensorValue == readings;
   

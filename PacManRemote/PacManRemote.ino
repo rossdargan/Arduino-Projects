@@ -2,7 +2,7 @@
 // See the full tutorial at http://www.ladyada.net/learn/sensors/ir.html
 // this code is public domain, please enjoy!
  
-int IRledPin =  13;    // LED connected to digital pin 13
+int IRledPin =  2;    // LED connected to digital pin 13
 long lowDelay = 530;
 long highDelay = 1660;
 // The setup() method runs once, when the sketch starts

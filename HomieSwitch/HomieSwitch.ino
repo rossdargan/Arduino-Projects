@@ -4,7 +4,7 @@
 
 RCSwitch mySwitch = RCSwitch();
 String statusPreamble = "0011001111101011";
-
+int transmitPort = D1;
 
 
 
@@ -29,22 +29,7 @@ void controlStatusSwitch(int houseCode, int socketCode, bool turnOn)
 }
 
 
-HomieNode rcSwitchNode("rcSwitch", "switch", rcSwitchOnHandler);
-bool rcSwitchOnHandler1(String value) {
-  return rcSwitchOnHandler("1",value);
-}
-bool rcSwitchOnHandler2(String value) {
-  return rcSwitchOnHandler("2",value);
-}
-bool rcSwitchOnHandler3(String value) {
-  return rcSwitchOnHandler("3",value);
-}
-bool rcSwitchOnHandler4(String value) {
-  return rcSwitchOnHandler("4",value);
-}
-bool rcSwitchOnHandler5(String value) {
-  return rcSwitchOnHandler("5",value);
-}
+HomieNode rcSwitchNode("rcSwitch", "switch", rcSwitchOnHandler, true);
 
 bool rcSwitchOnHandler(String property, String value) {
    int houseCode = 1;
@@ -69,15 +54,10 @@ void setup() {
   mySwitch.setProtocol(1);
   mySwitch.setRepeatTransmit(10);
   mySwitch.setPulseLength(307); // Bye Bye Standby
-  mySwitch.enableTransmit(5);
+  mySwitch.enableTransmit(transmitPort);
 
   Homie.setFirmware("homie-switch", "1.0.0");
   Homie.registerNode(rcSwitchNode);
-  rcSwitchNode.subscribe("1",rcSwitchOnHandler1);
-  rcSwitchNode.subscribe("2",rcSwitchOnHandler2);
-  rcSwitchNode.subscribe("3",rcSwitchOnHandler3);
-  rcSwitchNode.subscribe("4",rcSwitchOnHandler4);
-  rcSwitchNode.subscribe("5",rcSwitchOnHandler5);
 
   Homie.setup();
 }

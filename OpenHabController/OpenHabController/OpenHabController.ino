@@ -174,13 +174,13 @@ void CheckDoorbell()
     if(currentActive)
     {      
   Serial.println("Ding Dong!");    
-    ether.browseUrl(PSTR("/CMD"), "?Door_Bell=ON", website, my_callback);
+    ether.browseUrl(PSTR("/CMD"), "?Door_Bell=ON", website,PSTR("Authorization: Basic =="), my_callback);
       Serial.println("sent");
     }
     else
     {
       Serial.println("Off");
-    ether.browseUrl(PSTR("/CMD"), "?Door_Bell=OFF", website, my_callback);
+    ether.browseUrl(PSTR("/CMD"), "?Door_Bell=OFF",  website, PSTR("Authorization: Basic =="),my_callback);
     }
 
     previousActive = currentActive;
